@@ -20,7 +20,7 @@ app.use(async ctx => {
 app.listen(port)
 
 const getListTweets = async () => {
-    const t = new Twit({
+    const twit = new Twit({
         consumer_key: process.env.consumer_key,
         consumer_secret: process.env.consumer_secret,
         access_token: process.env.twitter_oauth_token,
@@ -34,7 +34,7 @@ const getListTweets = async () => {
         include_rts
     }
     
-    return await t.get('lists/statuses', opts)
+    return await twit.get('lists/statuses', opts)
         .then(({data}) => {            
             return data.map(tweet => {
                 return {
